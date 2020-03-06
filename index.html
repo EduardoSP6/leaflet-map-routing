@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leaflet Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: 550px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+</body>
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+<script>
+
+
+    var initialCoordinates = [-22.91, -43.20]; // Rio de Janeiro
+    var initialZoomLevel = 13;
+
+    var map = L.map('map').setView(initialCoordinates, initialZoomLevel);
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}{r}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+
+
+    var myPopup = "Olá mundo!";
+
+    L.Routing.control({
+        waypoints: [
+            L.latLng(-22.9749439, -43.365552),
+            L.latLng(-22.9749438, -43.365552),
+            L.latLng(-22.9749438, -43.3655521),
+            L.latLng(-22.9749452, -43.3655517),
+            L.latLng(-22.975575000000003, -43.36699),
+            L.latLng(-22.9420873, -43.3545041),
+            L.latLng(-22.94204666666667, -43.354485000000004),
+            L.latLng(-22.94208666666667, -43.354593333333334),
+            L.latLng(-22.94195333333333, -43.35475499999999),
+            L.latLng(-22.94217666666667, -43.35455666666667),
+            L.latLng(-22.94221166666667, -43.354400000000005),
+            L.latLng(-22.942009999999996, -43.354446666666675),
+            L.latLng(-22.942144999999996, -43.35460666666666),
+            L.latLng(-22.94195666666667, -43.354655),
+            L.latLng(-22.941976666666665,-43.35441000000001),
+            L.latLng(-22.94082166666667, -43.35512833333334),
+            L.latLng(-22.942050000000002, -43.354685),
+            L.latLng(-22.942018333333333, -43.35452166666667),
+            L.latLng(-22.94194, 		-43.35462166666666),
+            L.latLng(-22.94207333333333, -43.354581666666675),
+            L.latLng(-22.941876666666666, -43.35463),
+            L.latLng(-22.94185333333333, -43.354616666666665),
+            L.latLng(-22.941931666666665, -43.35460166666667),
+            L.latLng(-22.941936666666667, -43.354591666666664),
+            L.latLng(-22.94209166666667, -43.35450000000001),
+        ],
+        createMarker: function (i, start, n) { 
+            var marker_icon = null
+            if (i == 0) {
+                // This is the first marker, indicating start
+                marker_icon = "cd.png"
+            } else if (i == n -1) {
+                //This is the last marker indicating destination
+                marker_icon = "cd.png"
+            } else {
+                marker_icon = "car.png"
+            }
+
+            var iconProperties = {
+                iconUrl: marker_icon
+                , iconSize: [44, 59]
+                , iconAnchor: [22, 59]
+                , popupAnchor: [0, -50]
+             };
+
+             var mIcon = L.icon(iconProperties);
+
+            return L.marker (start.latLng, {
+                    draggable: false,
+                    bounceOnAdd: false,
+                    bounceOnAddOptions: {
+                        duration: 1000,
+                        height: 800, 
+                        function(){
+                            (bindPopup(myPopup).openOn(map))
+                        }
+                    },
+                    icon: mIcon
+            }).bindPopup(myPopup).openPopup();
+        }
+    }).addTo(map);
+
+</script>
+</html>
