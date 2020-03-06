@@ -27,12 +27,12 @@
 
     var map = L.map('map').setView(initialCoordinates, initialZoomLevel);
 
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}{r}.png', {
+    // tema do mapa. outros temas em: https://leaflet-extras.github.io/leaflet-providers/preview/
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-
-
+    // texto do popup dos marcadores
     var myPopup = "Olá mundo!";
 
     L.Routing.control({
@@ -62,6 +62,17 @@
             L.latLng(-22.941931666666665, -43.35460166666667),
             L.latLng(-22.941936666666667, -43.354591666666664),
             L.latLng(-22.94209166666667, -43.35450000000001),
+            L.latLng(-22.8681834,-43.3054687),
+            L.latLng(-22.8693306,-43.3038982),
+            L.latLng(-22.8842638, -43.3178461),
+            L.latLng(-22.8857197, -43.3176083),
+            L.latLng(-22.8922508, -43.3241845),
+            L.latLng(-22.891451, -43.3247881),
+            L.latLng(-22.8932628, -43.3220718),
+            L.latLng(-22.8839499, -43.3196571),
+            L.latLng(-22.87706697, -43.32056743),
+            L.latLng(-22.8810865, -43.3290132),
+            L.latLng(-22.8787118, -43.3300891),
         ],
         createMarker: function (i, start, n) { 
             var marker_icon = null
