@@ -38,6 +38,12 @@
     L.Routing.control({
         language: 'es',
         showAlternatives: false,
+        lineOptions: {
+            addWaypoints: false, // desabilita criacao de novo waypoint
+            linetouched: function () {
+                return false; // desabilita evento de clique nas linhas da rota
+            }
+        },
         waypoints: [
             L.latLng(-22.9749439, -43.365552),
             L.latLng(-22.9749438, -43.365552),
